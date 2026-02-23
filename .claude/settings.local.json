@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(del:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\km\\\\Desktop\\\\hello\\\\cleanup.ps1\")",
+      "Bash(powershell -ExecutionPolicy Bypass -Command \"Remove-Item ''C:\\\\Users\\\\km\\\\Desktop\\\\hello\\\\cleanup.ps1'' -Force\")",
+      "Bash(powershell.exe:*)",
+      "Bash(cd:*)"
+    ]
+  }
+}

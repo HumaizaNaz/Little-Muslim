@@ -1,0 +1,55 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#2952a3"/>
+      <stop offset="100%" stop-color="#0d1f3c"/>
+    </radialGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="512" height="512" rx="100" fill="url(#bg)"/>
+
+  <!-- Crescent Moon (circle minus circle) -->
+  <circle cx="210" cy="205" r="115" fill="#f5c518" filter="url(#glow)"/>
+  <circle cx="255" cy="178" r="95"  fill="#0d2050"/>
+
+  <!-- Main Star -->
+  <g transform="translate(345,138)" filter="url(#glow)">
+    <polygon points="0,-42 10,-14 40,-14 17,6 26,34 0,17 -26,34 -17,6 -40,-14 -10,-14" fill="#f5c518"/>
+  </g>
+
+  <!-- Small decorative star -->
+  <g transform="translate(388,228)">
+    <polygon points="0,-18 4,-6 18,-6 8,3 11,15 0,8 -11,15 -8,3 -18,-6 -4,-6" fill="#f5c518" opacity="0.65"/>
+  </g>
+
+  <!-- Open Book (Quran) -->
+  <g transform="translate(100,315)">
+    <!-- Book shadow -->
+    <rect x="8" y="8" width="296" height="140" rx="12" fill="#0d1f3c" opacity="0.4"/>
+    <!-- Book covers -->
+    <rect x="0" y="0" width="296" height="140" rx="12" fill="#c8951a"/>
+    <!-- Left page -->
+    <rect x="6" y="6" width="136" height="128" rx="8" fill="#fdf3d0"/>
+    <!-- Right page -->
+    <rect x="154" y="6" width="136" height="128" rx="8" fill="#fdf3d0"/>
+    <!-- Spine -->
+    <rect x="142" y="0" width="12" height="140" rx="6" fill="#a07010"/>
+    <!-- Left lines -->
+    <rect x="20" y="30" width="100" height="6" rx="3" fill="#c8951a" opacity="0.45"/>
+    <rect x="20" y="46" width="80"  height="6" rx="3" fill="#c8951a" opacity="0.45"/>
+    <rect x="20" y="62" width="95"  height="6" rx="3" fill="#c8951a" opacity="0.45"/>
+    <rect x="20" y="78" width="75"  height="6" rx="3" fill="#c8951a" opacity="0.45"/>
+    <rect x="20" y="94" width="90"  height="6" rx="3" fill="#c8951a" opacity="0.45"/>
+    <!-- Right lines -->
+    <rect x="162" y="30" width="100" height="6" rx="3" fill="#c8951a" opacity="0.45"/>
+    <rect x="162" y="46" width="80"  height="6" rx="3" fill="#c8951a" opacity="0.45"/>
+    <rect x="162" y="62" width="95"  height="6" rx="3" fill="#c8951a" opacity="0.45"/>
+    <rect x="162" y="78" width="75"  height="6" rx="3" fill="#c8951a" opacity="0.45"/>
+    <rect x="162" y="94" width="90"  height="6" rx="3" fill="#c8951a" opacity="0.45"/>
+  </g>
+</svg>

@@ -1,0 +1,182 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Ramadan Theme — Light Mode */
+  --background: oklch(0.98 0.005 240);
+  --foreground: oklch(0.18 0.02 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 240);
+  /* Islamic Blue #4169E1 */
+  --primary: oklch(0.49 0.2 264);
+  --primary-foreground: oklch(0.98 0 0);
+  /* Soft Gold #FFD700 */
+  --secondary: oklch(0.88 0.18 85);
+  --secondary-foreground: oklch(0.25 0.05 60);
+  --muted: oklch(0.94 0.01 240);
+  --muted-foreground: oklch(0.52 0.02 240);
+  /* Warm Amber #D4A574 */
+  --accent: oklch(0.73 0.1 60);
+  --accent-foreground: oklch(0.18 0.05 60);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.88 0.02 240);
+  --input: oklch(0.92 0.01 240);
+  --ring: oklch(0.49 0.2 264);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  /* Teal/Green for duas */
+  --chart-3: oklch(0.52 0.13 180);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.97 0.005 240);
+  --sidebar-foreground: oklch(0.18 0.02 240);
+  --sidebar-primary: oklch(0.49 0.2 264);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.73 0.1 60);
+  --sidebar-accent-foreground: oklch(0.18 0.05 60);
+  --sidebar-border: oklch(0.88 0.02 240);
+  --sidebar-ring: oklch(0.49 0.2 264);
+}
+
+.dark {
+  /* Ramadan Theme — Dark Mode (night sky) */
+  --background: oklch(0.14 0.02 264);
+  --foreground: oklch(0.95 0.01 240);
+  --card: oklch(0.19 0.03 264);
+  --card-foreground: oklch(0.95 0.01 240);
+  --popover: oklch(0.19 0.03 264);
+  --popover-foreground: oklch(0.95 0.01 240);
+  /* Lighter Islamic Blue for dark bg */
+  --primary: oklch(0.65 0.18 264);
+  --primary-foreground: oklch(0.1 0.02 264);
+  /* Gold stays visible on dark */
+  --secondary: oklch(0.82 0.16 85);
+  --secondary-foreground: oklch(0.2 0.05 60);
+  --muted: oklch(0.25 0.03 264);
+  --muted-foreground: oklch(0.65 0.02 240);
+  /* Amber for dark */
+  --accent: oklch(0.75 0.12 60);
+  --accent-foreground: oklch(0.15 0.05 60);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.95 0 0);
+  --border: oklch(0.28 0.04 264);
+  --input: oklch(0.25 0.03 264);
+  --ring: oklch(0.65 0.18 264);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.62 0.15 180);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.17 0.025 264);
+  --sidebar-foreground: oklch(0.95 0.01 240);
+  --sidebar-primary: oklch(0.65 0.18 264);
+  --sidebar-primary-foreground: oklch(0.1 0.02 264);
+  --sidebar-accent: oklch(0.75 0.12 60);
+  --sidebar-accent-foreground: oklch(0.15 0.05 60);
+  --sidebar-border: oklch(0.28 0.04 264);
+  --sidebar-ring: oklch(0.65 0.18 264);
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ── Custom Animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+
+@keyframes pulse-grow {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.05); }
+}
+
+.animate-float       { animation: float 3s ease-in-out infinite; }
+.animate-fade-in-up  { animation: fade-in-up 0.5s ease-out both; }
+.animate-slide-in    { animation: slide-in 0.4s ease-out both; }
+.animate-twinkle     { animation: twinkle 1.5s ease-in-out infinite; }
+.animate-pulse-grow  { animation: pulse-grow 1.5s ease-in-out infinite; }
+
+/* ── Arabic / Transliteration Text ── */
+.arabic-text {
+  font-family: 'Noto Sans Arabic', 'Arial', sans-serif;
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+  direction: rtl;
+  text-align: right;
+  font-weight: 600;
+}
+
+.transliteration {
+  font-style: italic;
+  letter-spacing: 0.02em;
+  font-size: 0.95rem;
+}

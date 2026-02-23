@@ -1,0 +1,89 @@
+{
+  "name": "Little Muslim Explorer",
+  "short_name": "Muslim Explorer",
+  "description": "Interactive Islamic learning app for kids (4-12). Learn Namaz, Wudu, Duas, Stories, and Ramadan Challenge with fun animations and authentic Arabic audio.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8f7f3",
+  "theme_color": "#4169E1",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192x192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512x512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshot-2.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["education", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "Learn Namaz",
+      "short_name": "Namaz",
+      "description": "Learn complete Islamic prayer with authentic voice",
+      "url": "/?screen=salah",
+      "icons": [
+        {
+          "src": "/icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Learn Duas",
+      "short_name": "Duas",
+      "description": "Learn 40+ Islamic prayers with Arabic audio",
+      "url": "/?screen=duas",
+      "icons": [
+        {
+          "src": "/icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "30-Day Challenge",
+      "short_name": "Challenge",
+      "description": "Complete 30-day Ramadan learning challenge",
+      "url": "/?screen=ramadan",
+      "icons": [
+        {
+          "src": "/icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
+}
