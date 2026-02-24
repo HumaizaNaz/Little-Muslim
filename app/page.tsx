@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTheme } from 'next-themes';
+import { ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LanguageProvider, useLanguage } from '@/lib/language-context';
 import AuthScreen from '@/components/auth-screen';
@@ -33,6 +34,7 @@ function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [showPinModal, setShowPinModal] = useState(false);
   const [pinTarget, setPinTarget] = useState<'dashboard' | 'logout' | null>(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const { theme, setTheme } = useTheme();
   const { lang, toggleLang } = useLanguage();
 
@@ -42,6 +44,22 @@ function AppContent() {
       try { setUser(JSON.parse(storedUser)); } catch {}
     }
     setIsLoading(false);
+  }, []);
+
+  // Scroll to top instantly when screen changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [currentScreen]);
+
+  // Show/hide scroll-to-top button
+  useEffect(() => {
+    const onScroll = () => setShowScrollTop(window.scrollY > 300);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const handleLogout = () => {
@@ -198,6 +216,17 @@ function AppContent() {
           </a>
         </p>
       </footer>
+
+      {/* ── Scroll to Top Button ── */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-5 z-50 w-12 h-12 rounded-full bg-primary text-white shadow-2xl flex items-center justify-center active:scale-90 transition-all hover:bg-primary/90 animate-fade-in-up"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp size={22} strokeWidth={2.5} />
+        </button>
+      )}
 
       {/* ── PIN Modal ── */}
       {showPinModal && (
