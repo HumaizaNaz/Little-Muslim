@@ -10,7 +10,7 @@ import { playStarSound } from '@/lib/audio-utils';
 import { useT } from '@/lib/language-context';
 import Emoji3D from '@/components/emoji3d';
 
-type Screen = 'home' | 'wudu' | 'salah' | 'roza' | 'stories' | 'duas' | 'rewards' | 'ramadan' | 'asmaul-husna' | 'calendar';
+type Screen = 'home' | 'wudu' | 'salah' | 'roza' | 'stories' | 'duas' | 'rewards' | 'ramadan' | 'asmaul-husna' | 'asmaul-nabi' | 'calendar';
 
 interface HomeContentProps {
   onNavigate: (screen: Screen) => void;
@@ -87,6 +87,16 @@ const FEATURE_CARDS = [
     borderClass: 'border-violet-400/50 hover:border-violet-500',
     bgClass:     'bg-gradient-to-br from-violet-400/25 via-purple-300/15 to-indigo-400/20',
     titleClass:  'text-violet-700 dark:text-violet-300',
+  },
+  {
+    screen: 'asmaul-nabi' as Screen,
+    emoji: '💚',
+    en: { title: '99 Names of Prophet ﷺ', desc: "Learn the beautiful names of Prophet Muhammad ﷺ!", btn: '💚 Learn Names' },
+    ur: { title: 'نبی ﷺ کے ۹۹ نام',       desc: 'حضرت محمد ﷺ کے خوبصورت نام سیکھو!',              btn: '💚 نام سیکھو' },
+    btnClass:    'bg-green-600 hover:bg-green-700 text-white',
+    borderClass: 'border-green-400/50 hover:border-green-500',
+    bgClass:     'bg-gradient-to-br from-green-400/25 via-emerald-300/15 to-teal-400/20',
+    titleClass:  'text-green-700 dark:text-green-300',
   },
   {
     screen: 'calendar' as Screen,
