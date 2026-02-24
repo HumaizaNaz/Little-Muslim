@@ -15,8 +15,10 @@ import RewardsScreen from '@/components/rewards-screen';
 import RamadanChallenge from '@/components/ramadan-challenge';
 import ParentsDashboard from '@/components/parents-dashboard';
 import ParentPinModal from '@/components/parent-pin-modal';
+import AsmaulHusna from '@/components/asmaul-husna';
+import IslamicCalendar from '@/components/islamic-calendar';
 
-type Screen = 'home' | 'wudu' | 'salah' | 'roza' | 'stories' | 'duas' | 'rewards' | 'ramadan' | 'parents';
+type Screen = 'home' | 'wudu' | 'salah' | 'roza' | 'stories' | 'duas' | 'rewards' | 'ramadan' | 'parents' | 'asmaul-husna' | 'calendar';
 
 interface User {
   id: number;
@@ -70,8 +72,10 @@ function AppContent() {
       case 'duas':    return <DuasGame onBack={() => setCurrentScreen('home')} />;
       case 'rewards': return <RewardsScreen onBack={() => setCurrentScreen('home')} />;
       case 'ramadan': return <RamadanChallenge onBack={() => setCurrentScreen('home')} />;
-      case 'parents': return <ParentsDashboard onBack={() => setCurrentScreen('home')} onLogout={handleLogout} />;
-      default:        return <HomeContent onNavigate={setCurrentScreen} username={user?.username} />;
+      case 'parents':      return <ParentsDashboard onBack={() => setCurrentScreen('home')} onLogout={handleLogout} />;
+      case 'asmaul-husna': return <AsmaulHusna onBack={() => setCurrentScreen('home')} />;
+      case 'calendar':     return <IslamicCalendar onBack={() => setCurrentScreen('home')} />;
+      default:             return <HomeContent onNavigate={setCurrentScreen} username={user?.username} />;
     }
   };
 

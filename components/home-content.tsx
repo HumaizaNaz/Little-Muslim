@@ -10,7 +10,7 @@ import { playStarSound } from '@/lib/audio-utils';
 import { useT } from '@/lib/language-context';
 import Emoji3D from '@/components/emoji3d';
 
-type Screen = 'home' | 'wudu' | 'salah' | 'roza' | 'stories' | 'duas' | 'rewards' | 'ramadan';
+type Screen = 'home' | 'wudu' | 'salah' | 'roza' | 'stories' | 'duas' | 'rewards' | 'ramadan' | 'asmaul-husna' | 'calendar';
 
 interface HomeContentProps {
   onNavigate: (screen: Screen) => void;
@@ -77,6 +77,26 @@ const FEATURE_CARDS = [
     borderClass: 'border-rose-400/50 hover:border-rose-500',
     bgClass:     'bg-gradient-to-br from-rose-400/25 via-pink-300/15 to-red-400/20',
     titleClass:  'text-rose-700 dark:text-rose-300',
+  },
+  {
+    screen: 'asmaul-husna' as Screen,
+    emoji: '📿',
+    en: { title: '99 Names of Allah',  desc: "Learn Allah's beautiful 99 names with audio!",        btn: '📿 Learn Names' },
+    ur: { title: 'اللہ کے ۹۹ نام',     desc: 'اللہ کے خوبصورت ۹۹ نام آواز کے ساتھ سیکھو!',         btn: '📿 نام سیکھو' },
+    btnClass:    'bg-violet-600 hover:bg-violet-700 text-white',
+    borderClass: 'border-violet-400/50 hover:border-violet-500',
+    bgClass:     'bg-gradient-to-br from-violet-400/25 via-purple-300/15 to-indigo-400/20',
+    titleClass:  'text-violet-700 dark:text-violet-300',
+  },
+  {
+    screen: 'calendar' as Screen,
+    emoji: '📅',
+    en: { title: 'Islamic Calendar',   desc: 'Today\'s Hijri date & upcoming Islamic events!',      btn: '📅 View Calendar' },
+    ur: { title: 'اسلامی کیلنڈر',      desc: 'آج کی ہجری تاریخ اور آنے والے اسلامی تہوار!',         btn: '📅 کیلنڈر دیکھو' },
+    btnClass:    'bg-cyan-600 hover:bg-cyan-700 text-white',
+    borderClass: 'border-cyan-400/50 hover:border-cyan-500',
+    bgClass:     'bg-gradient-to-br from-cyan-400/25 via-sky-300/15 to-blue-400/20',
+    titleClass:  'text-cyan-700 dark:text-cyan-300',
   },
 ];
 
