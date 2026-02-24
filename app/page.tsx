@@ -5,20 +5,35 @@ import { useTheme } from 'next-themes';
 import { ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LanguageProvider, useLanguage } from '@/lib/language-context';
+import dynamic from 'next/dynamic';
+
+// ── Eagerly loaded (needed on first paint) ──
 import AuthScreen from '@/components/auth-screen';
 import HomeContent from '@/components/home-content';
-import WuduGuide from '@/components/wudu-guide';
-import SalahGuide from '@/components/salah-guide';
-import RozaTracker from '@/components/roza-tracker';
-import StoriesScreen from '@/components/stories-screen';
-import DuasGame from '@/components/duas-game';
-import RewardsScreen from '@/components/rewards-screen';
-import RamadanChallenge from '@/components/ramadan-challenge';
-import ParentsDashboard from '@/components/parents-dashboard';
 import ParentPinModal from '@/components/parent-pin-modal';
-import AsmaulHusna from '@/components/asmaul-husna';
-import AsmaulNabi from '@/components/asmaul-nabi';
-import IslamicCalendar from '@/components/islamic-calendar';
+
+// ── Loading placeholder ──
+const ScreenLoader = () => (
+  <div className="min-h-[60vh] flex items-center justify-center">
+    <div className="text-center">
+      <div className="text-6xl mb-4 animate-float">🌙</div>
+      <p className="text-lg font-bold text-primary animate-pulse">Loading...</p>
+    </div>
+  </div>
+);
+
+// ── Lazily loaded — downloaded only when user opens that screen ──
+const WuduGuide        = dynamic(() => import('@/components/wudu-guide'),        { loading: () => <ScreenLoader />, ssr: false });
+const SalahGuide       = dynamic(() => import('@/components/salah-guide'),       { loading: () => <ScreenLoader />, ssr: false });
+const RozaTracker      = dynamic(() => import('@/components/roza-tracker'),      { loading: () => <ScreenLoader />, ssr: false });
+const StoriesScreen    = dynamic(() => import('@/components/stories-screen'),    { loading: () => <ScreenLoader />, ssr: false });
+const DuasGame         = dynamic(() => import('@/components/duas-game'),         { loading: () => <ScreenLoader />, ssr: false });
+const RewardsScreen    = dynamic(() => import('@/components/rewards-screen'),    { loading: () => <ScreenLoader />, ssr: false });
+const RamadanChallenge = dynamic(() => import('@/components/ramadan-challenge'), { loading: () => <ScreenLoader />, ssr: false });
+const ParentsDashboard = dynamic(() => import('@/components/parents-dashboard'), { loading: () => <ScreenLoader />, ssr: false });
+const AsmaulHusna      = dynamic(() => import('@/components/asmaul-husna'),      { loading: () => <ScreenLoader />, ssr: false });
+const AsmaulNabi       = dynamic(() => import('@/components/asmaul-nabi'),       { loading: () => <ScreenLoader />, ssr: false });
+const IslamicCalendar  = dynamic(() => import('@/components/islamic-calendar'),  { loading: () => <ScreenLoader />, ssr: false });
 
 type Screen = 'home' | 'wudu' | 'salah' | 'roza' | 'stories' | 'duas' | 'rewards' | 'ramadan' | 'parents' | 'asmaul-husna' | 'asmaul-nabi' | 'calendar';
 
