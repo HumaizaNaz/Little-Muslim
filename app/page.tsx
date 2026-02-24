@@ -91,20 +91,54 @@ function AppContent() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-background">
-      {/* Background blobs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+    <main className="min-h-screen relative overflow-hidden">
+
+      {/* ── Islamic Background ── */}
+      {/* Base gradient */}
+      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-indigo-50 via-blue-50 to-teal-50 dark:from-[#080d1a] dark:via-[#0b1530] dark:to-[#091224]" />
+
+      {/* Islamic geometric star pattern overlay */}
+      <div className="fixed inset-0 -z-10 pointer-events-none opacity-[0.07] dark:opacity-[0.15]">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="islamic-star" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M40 4L45 28L69 22L53 40L69 58L45 52L40 76L35 52L11 58L27 40L11 22L35 28Z"
+                fill="none" stroke="#4169E1" strokeWidth="1.2"/>
+              <rect x="31" y="31" width="18" height="18" fill="none" stroke="#4169E1" strokeWidth="0.8"
+                transform="rotate(45 40 40)"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#islamic-star)"/>
+        </svg>
       </div>
 
-      {/* ── Top Header (Kid-Friendly — minimal buttons) ── */}
-      <div className="relative z-10 bg-primary/10 border-b border-primary/20 px-4 py-3 flex justify-between items-center">
-        {/* Left: username */}
+      {/* Glowing orbs */}
+      <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-blue-400/20 dark:bg-blue-500/15 rounded-full blur-[80px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+      <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-teal-400/20 dark:bg-teal-500/10 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none" />
+      <div className="fixed top-1/2 left-1/2 w-72 h-72 bg-purple-400/10 dark:bg-purple-500/10 rounded-full blur-[60px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+
+      {/* Decorative crescent (top-right, large & subtle) */}
+      <div className="fixed top-10 right-6 pointer-events-none opacity-[0.08] dark:opacity-[0.18] select-none">
+        <svg viewBox="0 0 160 160" width="220" height="220">
+          <circle cx="80" cy="80" r="75" fill="#4169E1"/>
+          <circle cx="100" cy="62" r="70" fill="#f0f4ff" className="dark:[fill:#080d1a]"/>
+          <text x="115" y="38" fontSize="22" fill="#FFD700" fontFamily="Arial">★</text>
+          <text x="130" y="68" fontSize="13" fill="#FFD700" fontFamily="Arial">★</text>
+          <text x="105" y="20" fontSize="11" fill="#FFD700" fontFamily="Arial">★</text>
+        </svg>
+      </div>
+
+      {/* ── Top Header ── */}
+      <div className="relative z-10 bg-gradient-to-r from-primary/20 via-primary/10 to-accent/15 dark:from-primary/30 dark:via-primary/20 dark:to-accent/20 border-b border-primary/20 backdrop-blur-sm px-4 py-3 flex justify-between items-center">
+        {/* Left: username with avatar circle */}
         <div className="flex items-center gap-2">
-          <span className="text-2xl">👦</span>
-          <span className="text-base font-bold text-primary">{user.username}</span>
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-extrabold text-base shadow-md select-none">
+            {user.username.charAt(0).toUpperCase()}
+          </div>
+          <div className="flex flex-col leading-tight">
+            <span className="text-base font-bold text-primary">{user.username}</span>
+            <span className="text-[10px] text-muted-foreground">{lang === 'en' ? 'Little Explorer' : 'چھوٹا سیکھنے والا'}</span>
+          </div>
         </div>
 
         {/* Right: only theme toggle + hidden parent lock */}
@@ -142,6 +176,22 @@ function AppContent() {
       <div className="relative z-10">
         {renderScreen()}
       </div>
+
+      {/* ── Footer ── */}
+      <footer className="relative z-10 border-t border-primary/10 bg-primary/5 dark:bg-primary/10 backdrop-blur-sm px-4 py-4 text-center">
+        <p className="text-xs text-muted-foreground mb-1">
+          🌙 Little Muslim Explorer — {lang === 'en' ? 'Islamic Learning App for Kids' : 'بچوں کے لیے اسلامی تعلیمی ایپ'}
+        </p>
+        <p className="text-xs text-muted-foreground">
+          {lang === 'en' ? 'Questions or feedback?' : 'کوئی سوال یا رائے؟'}{' '}
+          <a
+            href="mailto:humaizaasghar@gmail.com"
+            className="text-primary font-semibold hover:underline"
+          >
+            humaizaasghar@gmail.com
+          </a>
+        </p>
+      </footer>
 
       {/* ── PIN Modal ── */}
       {showPinModal && (

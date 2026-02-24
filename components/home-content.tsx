@@ -24,59 +24,59 @@ const FEATURE_CARDS = [
     en: { title: 'Wudu Guide',        desc: 'Learn how to perform Wudu before prayer!',           btn: '💧 Learn Wudu' },
     ur: { title: 'وضو گائیڈ',          desc: 'نماز سے پہلے وضو کرنا سیکھو!',                       btn: '💧 وضو سیکھو' },
     btnClass:    'bg-blue-500 hover:bg-blue-600 text-white',
-    borderClass: 'border-blue-400/30 hover:border-blue-400/70',
-    bgClass:     '',
-    titleClass:  'text-blue-600 dark:text-blue-400',
+    borderClass: 'border-blue-400/50 hover:border-blue-500',
+    bgClass:     'bg-gradient-to-br from-blue-400/25 via-cyan-300/15 to-sky-400/20',
+    titleClass:  'text-blue-700 dark:text-blue-300',
   },
   {
     screen: 'salah' as Screen,
     emoji: '🕌',
     en: { title: 'Namaz Guide',        desc: 'Learn complete Salah step by step!',                 btn: '🕌 Learn Namaz' },
     ur: { title: 'نماز گائیڈ',          desc: 'قدم بہ قدم پوری نماز سیکھو!',                        btn: '🕌 نماز سیکھو' },
-    btnClass:    'bg-primary hover:bg-primary/90 text-primary-foreground',
-    borderClass: 'border-primary/30 hover:border-primary/70',
-    bgClass:     '',
-    titleClass:  'text-primary',
+    btnClass:    'bg-emerald-600 hover:bg-emerald-700 text-white',
+    borderClass: 'border-emerald-400/50 hover:border-emerald-500',
+    bgClass:     'bg-gradient-to-br from-emerald-400/25 via-green-300/15 to-teal-400/20',
+    titleClass:  'text-emerald-700 dark:text-emerald-300',
   },
   {
     screen: 'roza' as Screen,
     emoji: '🌙',
     en: { title: 'Roza Tracker',       desc: 'Track your fasts and earn stars!',                   btn: '🌙 Track Roza' },
     ur: { title: 'روزہ ٹریکر',          desc: 'اپنا روزہ ٹریک کرو اور ستارے کماؤ!',                  btn: '🌙 روزہ ٹریک کرو' },
-    btnClass:    'bg-accent hover:bg-accent/90 text-accent-foreground',
-    borderClass: 'border-accent/30 hover:border-accent/70',
-    bgClass:     '',
-    titleClass:  'text-accent',
+    btnClass:    'bg-purple-600 hover:bg-purple-700 text-white',
+    borderClass: 'border-purple-400/50 hover:border-purple-500',
+    bgClass:     'bg-gradient-to-br from-purple-400/25 via-indigo-300/15 to-violet-400/20',
+    titleClass:  'text-purple-700 dark:text-purple-300',
   },
   {
     screen: 'stories' as Screen,
     emoji: '📖',
     en: { title: 'Islamic Stories',    desc: 'Read amazing stories of the Prophets!',               btn: '📖 Read Stories' },
     ur: { title: 'اسلامی کہانیاں',      desc: 'انبیاء کرام کی حیرت انگیز کہانیاں پڑھو!',              btn: '📖 کہانی پڑھو' },
-    btnClass:    'bg-secondary hover:bg-secondary/90 text-secondary-foreground',
-    borderClass: 'border-secondary/50 hover:border-secondary/80',
-    bgClass:     '',
-    titleClass:  'text-secondary-foreground',
+    btnClass:    'bg-amber-500 hover:bg-amber-600 text-white',
+    borderClass: 'border-amber-400/50 hover:border-amber-500',
+    bgClass:     'bg-gradient-to-br from-amber-400/25 via-orange-300/15 to-yellow-400/20',
+    titleClass:  'text-amber-700 dark:text-amber-300',
   },
   {
     screen: 'duas' as Screen,
     emoji: '🤲',
     en: { title: 'Learn Duas',         desc: 'Memorize beautiful prayers for every moment!',        btn: '🤲 Learn Duas' },
     ur: { title: 'دعائیں سیکھو',        desc: 'ہر وقت کی پیاری دعائیں یاد کرو!',                    btn: '🤲 دعا سیکھو' },
-    btnClass:    'bg-chart-3 hover:bg-chart-3/90 text-white',
-    borderClass: 'border-chart-3/30 hover:border-chart-3/70',
-    bgClass:     '',
-    titleClass:  'text-chart-3',
+    btnClass:    'bg-teal-600 hover:bg-teal-700 text-white',
+    borderClass: 'border-teal-400/50 hover:border-teal-500',
+    bgClass:     'bg-gradient-to-br from-teal-400/25 via-cyan-300/15 to-emerald-400/20',
+    titleClass:  'text-teal-700 dark:text-teal-300',
   },
   {
     screen: 'ramadan' as Screen,
     emoji: '⭐',
     en: { title: '30 Day Challenge',   desc: 'Do daily tasks and earn rewards!',                    btn: '⭐ Start Challenge' },
     ur: { title: '۳۰ دن چیلنج',        desc: 'روز کام کرو اور انعام پاؤ!',                          btn: '⭐ چیلنج کرو' },
-    btnClass:    'bg-primary hover:bg-primary/90 text-primary-foreground',
-    borderClass: 'border-primary/30 hover:border-primary/70',
-    bgClass:     'bg-gradient-to-br from-primary/5 to-accent/5',
-    titleClass:  'text-primary',
+    btnClass:    'bg-rose-500 hover:bg-rose-600 text-white',
+    borderClass: 'border-rose-400/50 hover:border-rose-500',
+    bgClass:     'bg-gradient-to-br from-rose-400/25 via-pink-300/15 to-red-400/20',
+    titleClass:  'text-rose-700 dark:text-rose-300',
   },
 ];
 
@@ -115,28 +115,54 @@ export default function HomeContent({ onNavigate, username }: HomeContentProps) 
     <div className="min-h-screen flex flex-col px-4 py-6 max-w-2xl mx-auto">
       <Confetti active={showConfetti} />
 
-      {/* ── Header ── */}
-      <div className="flex justify-between items-start mb-6">
-        <div>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-primary leading-tight">
-            Little Muslim<br />Explorer 🌙
-          </h1>
-          <p className="text-base text-muted-foreground mt-1">
-            {t('Assalamu Alaikum,', 'السلام علیکم،')}{' '}
-            {username
-              ? <span className="font-bold text-primary">{username}!</span>
-              : <span>{t('young explorer!', 'میرے پیارے دوست!')}</span>}
-          </p>
+      {/* ── Hero Banner ── */}
+      <div className="relative rounded-3xl overflow-hidden mb-6 bg-gradient-to-br from-primary via-blue-700 to-indigo-800 dark:from-primary/90 dark:via-blue-800 dark:to-indigo-900 shadow-2xl">
+        {/* Subtle star pattern inside banner */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="banner-stars" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+                <path d="M25 3L27.5 18L43 14L32.5 25L43 36L27.5 32L25 47L22.5 32L7 36L17.5 25L7 14L22.5 18Z"
+                  fill="white" opacity="0.6"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#banner-stars)"/>
+          </svg>
         </div>
 
-        {/* Stars Button — bigger for kids */}
-        <button
-          onClick={() => onNavigate('rewards')}
-          className="flex flex-col items-center bg-secondary/20 hover:bg-secondary/30 active:scale-95 border-2 border-secondary/40 rounded-2xl px-4 py-3 transition-all"
-        >
-          <StarsDisplay stars={stars} />
-          <span className="text-xs font-bold text-muted-foreground mt-1">{t('My Stars ⭐', 'میرے ستارے ⭐')}</span>
-        </button>
+        <div className="relative z-10 px-6 py-5 flex justify-between items-center">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-3xl">🌙</span>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-white leading-tight drop-shadow">
+                Little Muslim<br/>Explorer
+              </h1>
+            </div>
+            <p className="text-blue-100 text-sm font-medium mt-1">
+              {t('Assalamu Alaikum,', 'السلام علیکم،')}{' '}
+              <span className="font-bold text-white">
+                {username ? `${username}!` : t('young explorer! 👋', 'میرے پیارے دوست! 👋')}
+              </span>
+            </p>
+          </div>
+
+          {/* Stars button in banner */}
+          <button
+            onClick={() => onNavigate('rewards')}
+            className="flex flex-col items-center bg-white/20 hover:bg-white/30 active:scale-95 border-2 border-white/30 rounded-2xl px-4 py-3 transition-all backdrop-blur-sm"
+          >
+            <StarsDisplay stars={stars} />
+            <span className="text-xs font-bold text-blue-100 mt-1">{t('My Stars', 'میرے ستارے')} ⭐</span>
+          </button>
+        </div>
+
+        {/* Decorative crescent inside banner */}
+        <div className="absolute right-4 bottom-0 opacity-20 pointer-events-none select-none">
+          <svg viewBox="0 0 80 80" width="100" height="100">
+            <circle cx="40" cy="40" r="36" fill="white"/>
+            <circle cx="50" cy="32" r="34" fill="#1e40af"/>
+          </svg>
+        </div>
       </div>
 
       {/* ── Mascot ── */}
@@ -145,31 +171,31 @@ export default function HomeContent({ onNavigate, username }: HomeContentProps) 
       </div>
 
       {/* ── Feature Cards ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
+      <div className="grid grid-cols-2 gap-4 mb-6">
         {FEATURE_CARDS.map((card) => (
           <Card
             key={card.screen}
             onClick={() => onNavigate(card.screen)}
-            className={`cursor-pointer hover:shadow-xl active:scale-[0.97] transition-all duration-200 p-6 border-2 ${card.borderClass} ${card.bgClass} bg-card/60 backdrop-blur`}
+            className={`cursor-pointer hover:shadow-2xl hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 p-5 border-2 ${card.borderClass} ${card.bgClass} backdrop-blur-sm`}
           >
             <div className="flex flex-col items-center text-center">
-              {/* Big 3D emoji */}
+              {/* Big 3D emoji with glow */}
               <div className="mb-3 drop-shadow-xl">
-                <Emoji3D emoji={card.emoji} size={80} />
+                <Emoji3D emoji={card.emoji} size={72} />
               </div>
 
-              {/* Title — bigger for kids */}
-              <h2 className={`text-xl font-extrabold mb-2 ${card.titleClass}`}>
+              {/* Title */}
+              <h2 className={`text-base font-extrabold mb-1 ${card.titleClass}`}>
                 {t(card.en.title, card.ur.title)}
               </h2>
 
-              {/* Description — readable size */}
-              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+              {/* Description */}
+              <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
                 {t(card.en.desc, card.ur.desc)}
               </p>
 
-              {/* Button — tall for easy tapping */}
-              <Button className={`w-full py-4 text-base font-bold rounded-xl ${card.btnClass}`}>
+              {/* Button */}
+              <Button className={`w-full py-3 text-sm font-bold rounded-xl ${card.btnClass}`}>
                 {t(card.en.btn, card.ur.btn)}
               </Button>
             </div>
@@ -178,10 +204,10 @@ export default function HomeContent({ onNavigate, username }: HomeContentProps) 
       </div>
 
       {/* ── Daily Challenge ── */}
-      <Card className={`p-5 border-2 mb-6 transition-all ${
+      <Card className={`p-5 border-2 mb-6 transition-all backdrop-blur-sm ${
         challengeDone
-          ? 'border-green-400/50 bg-green-50 dark:bg-green-950/30'
-          : 'border-primary/30 bg-card/60'
+          ? 'border-green-400/60 bg-gradient-to-r from-green-400/20 to-emerald-400/15'
+          : 'border-yellow-400/50 bg-gradient-to-r from-yellow-400/15 via-amber-300/10 to-orange-400/15'
       }`}>
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">

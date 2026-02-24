@@ -1,131 +1,60 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Emoji3D from '@/components/emoji3d';
+import { useT } from '@/lib/language-context';
+
+const GREETINGS = [
+  { en: 'Ready to learn today? 🌟', ur: 'آج سیکھنے کے لیے تیار؟ 🌟' },
+  { en: 'MashaAllah, keep going! ✨', ur: 'ماشاءاللہ، جاری رکھو! ✨' },
+  { en: 'Every dua brings you closer to Allah 🤲', ur: 'ہر دعا تمھیں اللہ سے قریب کرتی ہے 🤲' },
+  { en: "You're doing amazing! 💪", ur: 'تم بہت اچھا کر رہے ہو! 💪' },
+];
 
 export default function Mascot() {
-  const [wave, setWave] = useState(false);
-  const [twinkle, setTwinkle] = useState(true);
+  const t = useT();
+  const [greetingIdx, setGreetingIdx] = useState(0);
+  const [bounce, setBounce] = useState(true);
 
   useEffect(() => {
-    // Wave animation on mount
-    setWave(true);
-    const timer = setTimeout(() => setWave(false), 1200);
-
-    // Twinkle effect
-    const twinkleTimer = setInterval(() => {
-      setTwinkle(prev => !prev);
-    }, 2000);
-
-    return () => {
-      clearTimeout(timer);
-      clearInterval(twinkleTimer);
-    };
+    // Stop bounce after 1.2s
+    const b = setTimeout(() => setBounce(false), 1200);
+    // Rotate greeting every 4s
+    const g = setInterval(() => {
+      setGreetingIdx(i => (i + 1) % GREETINGS.length);
+    }, 4000);
+    return () => { clearTimeout(b); clearInterval(g); };
   }, []);
 
   return (
-    <div className="flex flex-col items-center mb-8 animate-fade-in-up">
-      <div className="relative w-40 h-40 flex items-center justify-center">
-        {/* Background Glow */}
-        <div className="absolute inset-0 rounded-full bg-primary/10 animate-pulse blur-xl" />
+    <div className="flex flex-col items-center mb-2 animate-fade-in-up">
+      {/* Glow ring behind mascot */}
+      <div className="relative flex items-center justify-center">
+        <div className="absolute w-44 h-44 rounded-full bg-gradient-to-br from-primary/30 via-accent/20 to-secondary/30 blur-2xl animate-pulse" />
 
-        {/* Crescent Moon Mascot */}
-        <svg
-          viewBox="0 0 200 200"
-          className={`w-full h-full drop-shadow-2xl transition-transform ${wave ? 'animate-bounce' : 'animate-float'}`}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* Crescent Shape */}
-          <defs>
-            <linearGradient id="crescentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: '#4169E1', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: '#6495ED', stopOpacity: 1 }} />
-            </linearGradient>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
+        {/* 3D Mosque icon as hero mascot */}
+        <div className={`relative z-10 drop-shadow-2xl ${bounce ? 'animate-bounce' : 'animate-float'}`}>
+          <Emoji3D emoji="🕌" size={120} alt="Mosque" />
+        </div>
 
-          {/* Main Crescent */}
-          <circle
-            cx="100"
-            cy="100"
-            r="90"
-            fill="url(#crescentGradient)"
-            filter="url(#glow)"
-          />
-          <circle
-            cx="115"
-            cy="85"
-            r="85"
-            fill="white"
-          />
-
-          {/* Eyes */}
-          <circle
-            cx="72"
-            cy="100"
-            r="7"
-            fill="#1a1a1a"
-            className="animate-pulse"
-            style={{ animationDuration: '2s' }}
-          />
-          <circle
-            cx="95"
-            cy="90"
-            r="7"
-            fill="#1a1a1a"
-            className="animate-pulse"
-            style={{ animationDuration: '2s' }}
-          />
-
-          {/* Smile */}
-          <path
-            d="M 68 115 Q 83 128 98 115"
-            stroke="#1a1a1a"
-            strokeWidth="4"
-            fill="none"
-            strokeLinecap="round"
-          />
-
-          {/* Star Twinkle */}
-          <g className="animate-twinkle">
-            <text
-              x="140"
-              y="60"
-              fontSize="24"
-              fontFamily="Arial"
-              style={{ animationDuration: '1.5s' }}
-            >
-              ✨
-            </text>
-          </g>
-        </svg>
-
-        {/* Wave Hand Animation */}
-        {wave && (
-          <div
-            className="absolute -right-4 top-12 text-4xl animate-bounce"
-            style={{ animationDuration: '0.6s', animationDelay: '0.2s' }}
-          >
-            👋
-          </div>
-        )}
-
-        {/* Sparkles around mascot */}
-        <div className="absolute -top-4 left-4 text-xl animate-pulse" style={{ animationDuration: '2s' }}>⭐</div>
-        <div className="absolute -bottom-4 right-6 text-lg animate-pulse" style={{ animationDuration: '2.5s', animationDelay: '0.5s' }}>✨</div>
+        {/* Floating sparkles */}
+        <div className="absolute -top-2 -right-2 animate-twinkle">
+          <Emoji3D emoji="⭐" size={28} />
+        </div>
+        <div className="absolute -bottom-1 -left-3 animate-twinkle" style={{ animationDelay: '0.8s' }}>
+          <Emoji3D emoji="✨" size={22} />
+        </div>
+        <div className="absolute top-4 -left-4 animate-twinkle" style={{ animationDelay: '0.4s' }}>
+          <Emoji3D emoji="🌙" size={24} />
+        </div>
       </div>
 
-      <p className="mt-6 text-2xl font-bold text-primary text-center animate-slide-in">
-        Welcome, Explorer!
-      </p>
-      <p className="text-sm text-muted-foreground text-center mt-2 animate-slide-in" style={{ animationDelay: '0.1s' }}>
-        Ready to learn and have fun?
-      </p>
+      {/* Rotating greeting */}
+      <div className="mt-4 px-5 py-2 bg-primary/10 dark:bg-primary/20 rounded-2xl border border-primary/20 text-center max-w-xs">
+        <p className="text-sm font-semibold text-primary">
+          {t(GREETINGS[greetingIdx].en, GREETINGS[greetingIdx].ur)}
+        </p>
+      </div>
     </div>
   );
 }
