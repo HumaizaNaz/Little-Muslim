@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Volume2, Loader2 } from 'lucide-react';
-import { playScholarOrTTS, playStarSound, speakArabic, stopAudio } from '@/lib/audio-utils';
+import { playScholarOrTTS, playStarSound, speakArabic, stopAudio, type Stoppable } from '@/lib/audio-utils';
 import { useT } from '@/lib/language-context';
 import Emoji3D from '@/components/emoji3d';
 
@@ -141,7 +141,7 @@ export default function SalahGuide({ onBack }: SalahGuideProps) {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [showCompletion, setShowCompletion] = useState(false);
   const [audioStatus, setAudioStatus] = useState<'idle' | 'loading' | 'playing'>('idle');
-  const currentAudio = useRef<HTMLAudioElement | null>(null);
+  const currentAudio = useRef<Stoppable | null>(null);
 
   // Stop audio when step changes
   useEffect(() => {

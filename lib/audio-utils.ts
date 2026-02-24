@@ -47,33 +47,76 @@ const getVoices = (): Promise<SpeechSynthesisVoice[]> => {
   });
 };
 
-// ── Scholar Audio URLs (Mishary Alafasy via everyayah.com — proven reliable) ──
-// Format: {surah_3digits}{verse_3digits}.mp3
-const SCHOLAR_AUDIO_URLS: Record<string, string> = {
-  // Quran surahs (everyayah.com — Alafasy 128kbps)
-  fatiha:         'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // Al-Fatiha v1
-  ikhlas:         'https://everyayah.com/data/Alafasy_128kbps/112001.mp3', // Al-Ikhlas v1
-  bismillah:      'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // Bismillah
-  tasmiyyah:      'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // Bismillah
-  // Common Salah phrases (short Quranic/du'a snippets via everyayah.com)
-  allahuakbar:    'https://everyayah.com/data/Alafasy_128kbps/002185.mp3', // Allahu Akbar verse
-  allahuakbar_takbir: 'https://everyayah.com/data/Alafasy_128kbps/002185.mp3',
-  tasbih_ruku:    'https://everyayah.com/data/Alafasy_128kbps/056074.mp3', // Subhana Rabbil Azeem (56:74)
-  tasbih_sujud:   'https://everyayah.com/data/Alafasy_128kbps/087001.mp3', // Sabbihisma Rabbik al-A'la (87:1)
-  subhanallah:    'https://everyayah.com/data/Alafasy_128kbps/087001.mp3',
+// ── Stoppable interface — compatible with HTMLAudioElement.pause() ──
+export type Stoppable = { pause: () => void };
+
+// ── Surahs that need all verses played sequentially ──
+const SURAH_VERSE_COUNTS: Record<string, { surah: number; count: number }> = {
+  fatiha: { surah: 1,   count: 7 }, // Al-Fatiha:  7 verses
+  ikhlas: { surah: 112, count: 4 }, // Al-Ikhlas:  4 verses
 };
 
-// Play scholar audio (CDN for Quran, Google TTS for non-Quran phrases)
-// Uses triedFallback flag to prevent double-firing from onerror + play().catch()
+// ── Play a full Quran surah by chaining verse-by-verse files ──
+// everyayah.com Alafasy 128kbps — format: {surah3}{verse3}.mp3
+const playVerseChain = (
+  surahNum: number,
+  verseCount: number,
+  onPlay?: () => void,
+  onEnd?: () => void,
+  onError?: () => void
+): Stoppable => {
+  const base = 'https://everyayah.com/data/Alafasy_128kbps/';
+  const s = String(surahNum).padStart(3, '0');
+  let stopped = false;
+  let audioEl: HTMLAudioElement | null = null;
+
+  const playVerse = (v: number) => {
+    if (stopped) return;
+    if (v > verseCount) { onEnd?.(); return; }
+
+    const url = `${base}${s}${String(v).padStart(3, '0')}.mp3`;
+    audioEl = new Audio(url);
+
+    if (v === 1) audioEl.onplay = () => onPlay?.();
+    audioEl.onended = () => { if (!stopped) playVerse(v + 1); };
+    audioEl.onerror = () => { if (!stopped) onError?.(); };
+    audioEl.play().catch(() => { if (!stopped) onError?.(); });
+  };
+
+  playVerse(1);
+  return { pause: () => { stopped = true; audioEl?.pause(); } };
+};
+
+// ── Scholar Audio URLs (Mishary Alafasy via everyayah.com — single-file phrases) ──
+const SCHOLAR_AUDIO_URLS: Record<string, string> = {
+  bismillah:          'https://everyayah.com/data/Alafasy_128kbps/001001.mp3',
+  tasmiyyah:          'https://everyayah.com/data/Alafasy_128kbps/001001.mp3',
+  allahuakbar:        'https://everyayah.com/data/Alafasy_128kbps/002185.mp3',
+  allahuakbar_takbir: 'https://everyayah.com/data/Alafasy_128kbps/002185.mp3',
+  tasbih_ruku:        'https://everyayah.com/data/Alafasy_128kbps/056074.mp3',
+  tasbih_sujud:       'https://everyayah.com/data/Alafasy_128kbps/087001.mp3',
+  subhanallah:        'https://everyayah.com/data/Alafasy_128kbps/087001.mp3',
+};
+
+// ── Play scholar audio (CDN → Google TTS → onError) ──
+// For fatiha/ikhlas → plays ALL verses sequentially via playVerseChain
+// Returns a Stoppable (has .pause()) so callers don't need to care about type
 export const playScholarOrTTS = (
   phraseKey: string,
   arabicText: string,
   onPlay?: () => void,
   onEnd?: () => void,
   onError?: () => void
-): HTMLAudioElement | null => {
+): Stoppable | null => {
   if (typeof window === 'undefined') return null;
 
+  // Full surah? Play all verses sequentially
+  const surahInfo = SURAH_VERSE_COUNTS[phraseKey];
+  if (surahInfo) {
+    return playVerseChain(surahInfo.surah, surahInfo.count, onPlay, onEnd, onError);
+  }
+
+  // Single-file CDN or Google TTS fallback
   const cdnUrl = SCHOLAR_AUDIO_URLS[phraseKey];
   const ttsUrl = `/api/tts?text=${encodeURIComponent(arabicText.slice(0, 200))}`;
   const primaryUrl = cdnUrl || ttsUrl;
@@ -82,7 +125,7 @@ export const playScholarOrTTS = (
   let triedFallback = false;
 
   const tryFallback = () => {
-    if (triedFallback) return; // prevent double-trigger
+    if (triedFallback) return;
     triedFallback = true;
 
     if (cdnUrl) {
@@ -101,7 +144,7 @@ export const playScholarOrTTS = (
   audio.onended = () => onEnd?.();
   audio.onerror = tryFallback;
   audio.play().catch(tryFallback);
-  return audio;
+  return { pause: () => audio.pause() };
 };
 
 // ── Play Arabic via Google TTS API route ──
