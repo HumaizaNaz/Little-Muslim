@@ -87,15 +87,13 @@ const playVerseChain = (
   return { pause: () => { stopped = true; audioEl?.pause(); } };
 };
 
-// ── Scholar Audio URLs (Mishary Alafasy via everyayah.com — single-file phrases) ──
+// ── Scholar Audio URLs (Mishary Alafasy via everyayah.com) ──
+// ONLY map keys where the Quran verse audio exactly matches the phrase.
+// Sunnah/hadith phrases (tasbih, takbir, sana, etc.) are NOT listed here
+// so they fall through to Google TTS which reads the exact Arabic text.
 const SCHOLAR_AUDIO_URLS: Record<string, string> = {
-  bismillah:          'https://everyayah.com/data/Alafasy_128kbps/001001.mp3',
-  tasmiyyah:          'https://everyayah.com/data/Alafasy_128kbps/001001.mp3',
-  allahuakbar:        'https://everyayah.com/data/Alafasy_128kbps/002185.mp3',
-  allahuakbar_takbir: 'https://everyayah.com/data/Alafasy_128kbps/002185.mp3',
-  tasbih_ruku:        'https://everyayah.com/data/Alafasy_128kbps/056074.mp3',
-  tasbih_sujud:       'https://everyayah.com/data/Alafasy_128kbps/087001.mp3',
-  subhanallah:        'https://everyayah.com/data/Alafasy_128kbps/087001.mp3',
+  bismillah:  'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // بسم الله الرحمن الرحيم (exact match)
+  tasmiyyah:  'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // same
 };
 
 // ── Play scholar audio (CDN → Google TTS → onError) ──
