@@ -50,10 +50,17 @@ const getVoices = (): Promise<SpeechSynthesisVoice[]> => {
 // ── Scholar Audio URLs (Mishary Alafasy via everyayah.com — proven reliable) ──
 // Format: {surah_3digits}{verse_3digits}.mp3
 const SCHOLAR_AUDIO_URLS: Record<string, string> = {
-  fatiha:    'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // Al-Fatiha: Bismillah
-  ikhlas:    'https://everyayah.com/data/Alafasy_128kbps/112001.mp3', // Al-Ikhlas: Qul huwallahu ahad
-  bismillah: 'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // Bismillah
-  tasmiyyah: 'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // Bismillah
+  // Quran surahs (everyayah.com — Alafasy 128kbps)
+  fatiha:         'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // Al-Fatiha v1
+  ikhlas:         'https://everyayah.com/data/Alafasy_128kbps/112001.mp3', // Al-Ikhlas v1
+  bismillah:      'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // Bismillah
+  tasmiyyah:      'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // Bismillah
+  // Common Salah phrases (short Quranic/du'a snippets via everyayah.com)
+  allahuakbar:    'https://everyayah.com/data/Alafasy_128kbps/002185.mp3', // Allahu Akbar verse
+  allahuakbar_takbir: 'https://everyayah.com/data/Alafasy_128kbps/002185.mp3',
+  tasbih_ruku:    'https://everyayah.com/data/Alafasy_128kbps/056074.mp3', // Subhana Rabbil Azeem (56:74)
+  tasbih_sujud:   'https://everyayah.com/data/Alafasy_128kbps/087001.mp3', // Sabbihisma Rabbik al-A'la (87:1)
+  subhanallah:    'https://everyayah.com/data/Alafasy_128kbps/087001.mp3',
 };
 
 // Play scholar audio (CDN for Quran, Google TTS for non-Quran phrases)

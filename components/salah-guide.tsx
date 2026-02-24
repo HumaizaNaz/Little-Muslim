@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Volume2, Loader2 } from 'lucide-react';
-import { playScholarOrTTS, playStarSound } from '@/lib/audio-utils';
+import { playScholarOrTTS, playStarSound, speakArabic, stopAudio } from '@/lib/audio-utils';
 import { useT } from '@/lib/language-context';
 import Emoji3D from '@/components/emoji3d';
 
@@ -154,6 +154,7 @@ export default function SalahGuide({ onBack }: SalahGuideProps) {
 
   const handleNext = () => {
     currentAudio.current?.pause();
+    stopAudio();
     setAudioStatus('idle');
 
     if (currentStep < SALAH_STEPS.length - 1) {
@@ -170,6 +171,9 @@ export default function SalahGuide({ onBack }: SalahGuideProps) {
 
   const handlePrevious = () => {
     if (currentStep > 0) {
+      currentAudio.current?.pause();
+      stopAudio();
+      setAudioStatus('idle');
       setCurrentStep(currentStep - 1);
       setCompletedSteps(completedSteps.filter(s => s !== currentStep - 1));
     }
@@ -289,6 +293,7 @@ export default function SalahGuide({ onBack }: SalahGuideProps) {
             onClick={() => {
               if (audioStatus === 'loading' || audioStatus === 'playing') {
                 currentAudio.current?.pause();
+                stopAudio(); // also cancel Web Speech if active
                 setAudioStatus('idle');
                 return;
               }
@@ -299,7 +304,13 @@ export default function SalahGuide({ onBack }: SalahGuideProps) {
                 step.arabic,
                 () => setAudioStatus('playing'),
                 () => setAudioStatus('idle'),
-                () => setAudioStatus('idle')
+                () => {
+                  // Final fallback: Web Speech API (always works offline too)
+                  setAudioStatus('playing');
+                  speakArabic(step.arabic).then(() => {
+                    setTimeout(() => setAudioStatus('idle'), 500);
+                  });
+                }
               );
               if (!currentAudio.current) setAudioStatus('idle');
             }}
