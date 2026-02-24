@@ -6,7 +6,11 @@
       "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\km\\\\Desktop\\\\hello\\\\cleanup.ps1\")",
       "Bash(powershell -ExecutionPolicy Bypass -Command \"Remove-Item ''C:\\\\Users\\\\km\\\\Desktop\\\\hello\\\\cleanup.ps1'' -Force\")",
       "Bash(powershell.exe:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(cd /c/Users/km/Desktop/hello && git remote add origin https://github.com/HumaizaNaz/Little-Muslim.git && git push -u origin main 2>&1)",
+      "Bash(cd /c/Users/km/Desktop/hello && vercel --prod --yes 2>&1)",
+      "Bash(cd /c/Users/km/Desktop/hello && pnpm install 2>&1)",
+      "Bash(tail:*)"
     ]
   }
 }
